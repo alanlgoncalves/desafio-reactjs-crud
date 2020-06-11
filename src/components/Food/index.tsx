@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { FiEdit3, FiTrash } from 'react-icons/fi';
 
@@ -27,12 +27,12 @@ const Food: React.FC<IProps> = ({
   const [isAvailable, setIsAvailable] = useState(food.available);
 
   async function toggleAvailable(): Promise<void> {
-    // TODO UPDATE STATUS (available)
+    setIsAvailable(!isAvailable);
   }
 
-  function setEditingFood(): void {
-    // TODO - SET THE ID OF THE CURRENT ITEM TO THE EDITING FOOD AND OPEN MODAL
-  }
+  const setEditingFood = useCallback(() => {
+    handleEditFood(food);
+  }, [food, handleEditFood]);
 
   return (
     <Container available={isAvailable}>
